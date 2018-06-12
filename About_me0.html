@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+h1 {
+    color: white;
+    text-align: center;
+}
+p {
+    color: white;
+    text-align: left;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+</style>
+  <title>About Me</title>
+</head>
+<body style="background-image:url('techno1.jpg')">
+  <h1>Hola!</h1>
+  <table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>School</th> 
+      <th>Hobbies</th>
+    </tr>
+    <tr>
+      <td>Yun Waddy Soe</td>
+      <td>18 years old</td>
+      <td>National Junior College</td>
+      <td>Dance</td>
+    </tr>
+    <p><button type="button" onclick="myFunction()">One interesting fact</button>
+       <p id="demo">Click to view.</p>
+       <script>
+       function myFunction() { 
+        document.getElementById("demo").innerHTML = "I do computing.";
+       }
+       </script>
+       <img src="programming.gif" alt="Computer man" style="width:48px;height:48px;">
+    </p>
+           
+</body>
+</html>
