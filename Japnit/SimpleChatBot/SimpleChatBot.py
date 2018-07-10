@@ -30,7 +30,10 @@ def form():
         db.close()
         return render_template('form.html', chat = records)
     else:
-        return render_template('form.html', chat = [])
+        db = get_db()
+        records = db.execute('SELECT * FROM chatbot').fetchall()
+        db.close()
+        return render_template('form.html', chat = records)
     
 if __name__ == '__main__':
     app.run(debug=True)
