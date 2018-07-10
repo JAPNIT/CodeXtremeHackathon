@@ -1,4 +1,9 @@
 import nltk, string, random
+
+#initialise
+user_greet=input("Welcome to MEDIBot! Start with a greeting, or cancel: ")
+user_respond="I want to view medical records."
+
 #noise reduction/expression removal like "lah" and punctuation removal
 lst_stop_words=open("stop_words_and_singlish.txt", "r")
 stop_words=[]
@@ -14,7 +19,7 @@ def _remove_noise(input_text):
     noise_free_text=noise_free_text.translate(translator_punc)
     return noise_free_text
 
-words=(_remove_noise("Hello Medibot, is climbing healthy?"))
+words=(_remove_noise(user_greet))
 
 #word standardisation:
 phrases=open("singlish_phrases.txt", "r")
@@ -48,7 +53,7 @@ for word in new_words:
 
 new_words= ''.join(word_result)
 
-#greeting check
+#greeting check? 
 def response_greetings(greeting):
     greeting_file=open("Greetings.txt", "r")
     lst_greet=[]
@@ -56,13 +61,25 @@ def response_greetings(greeting):
         lst_greet.append((''.join(line.strip('\n').split('\n'))))
     greeting_file.close()
     greeting=list(greeting.split())
-    print(greeting)
     for i in range(len(greeting)):
-        if greeting[i] in lst_greet:
+        if greeting[i].lower() in ['hello', 'hi', 'hey', 'sup']:
             return random.choice(lst_greet)
         else:
             return ("Whoops, try a greeting instead!")
 
 print(response_greetings(new_words))
+
+#medical response
+def response(user_response):
+    user_response=list(user_response.split())
+    for i in range(len(user_response)):
+        if user_response[i].lower() in ['medical', 'record', 'records']:
+            return "Your current records: " + "RECORDS"
+        elif user_response[i].lower() in ['sugar', 'diabetic']:
+            return "Your current status for DIABETES is: " + "diabetic/non" + "thus, SUGAR is " + "no/moderation"
+    return "Anything else?"
+
+responses=_remove_noise(user_respond)
+print(response(responses))
 
 
