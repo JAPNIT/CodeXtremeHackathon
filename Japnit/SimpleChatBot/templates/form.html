@@ -10,7 +10,15 @@
         <p class="botText"><span>Hi! I'm Chatterbot.</span></p>
       </div>
       {% for i in chat %}
-      <p class="userText"><span> {{i["chat"]}} </span></p>
+
+        {% if i["speaker"] == "user" %}
+        <p class="userText"><span> {{i["chat"]}} </span></p>
+        {% endif %}
+        
+        {% if i["speaker"] == "bot" %}
+        <p class="botText"> <span> {{i["chat"]}} </span></p>
+        {% endif %}
+      
       {% endfor %}
       <form action="{{ url_for('form') }}" method="POST">
       <div id="userInput">
