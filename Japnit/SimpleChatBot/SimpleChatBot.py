@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def create_db():
     db = get_db()
-    db.execute('CREATE TABLE chatbot (id INTEGER PRIMARY KEY AUTOINCREMENT, chat TEXT, timestamp TEXT)')
+    db.execute('CREATE TABLE chatbot (id INTEGER PRIMARY KEY AUTOINCREMENT, chat TEXT, timestamp TEXT, speaker TEXT)')
     print("created")
     db.close()
 
@@ -23,13 +23,17 @@ if not os.path.isfile('db.sqlite3'):
 def form():
     if request.method == 'POST':
         db = get_db()
-        db.execute('INSERT INTO chatbot (chat, timestamp) VALUES (?, ?)', (request.form['text'], time.time(), ) )
+        db.execute('INSERT INTO chatbot (chat, timestamp, speaker) VALUES (?, ?, ?)', (request.form['text'], time.time(), "user", ) )
+        db.execute('INSERT INTO chatbot (chat, timestamp, speaker) VALUES (?, ?, ?)', ("ok", time.time(), "bot", ) )
         db.commit()
         records = db.execute('SELECT * FROM chatbot').fetchall()
         db.close()
-        return render_template('form.html', chat = records )
+        return render_template('form.html', chat = records)
     else:
-        return render_template('form.html', chat = [])
+        db = get_db()
+        records = db.execute('SELECT * FROM chatbot').fetchall()
+        db.close()
+        return render_template('form.html', chat = records)
     
 if __name__ == '__main__':
     app.run(debug=True)
