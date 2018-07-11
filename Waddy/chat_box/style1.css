@@ -31,7 +31,7 @@ body {
     width: 10px;
 }
 
-.chatlogs::-webkit-scrollbar-thumc {
+.chatlogs::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: rgba(0,0,0,.1);
 }
@@ -98,7 +98,7 @@ body {
     width: 10px;
 }
 
-.chatlogs::-webkit-scrollbar-thumc {
+.chatlogs::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: rgba(0,0,0,.1);
 }
